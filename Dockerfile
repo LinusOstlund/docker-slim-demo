@@ -1,17 +1,15 @@
-FROM python:3
+# a nginx webserver compatible with my Flask app
+FROM tiangolo/uwsgi-nginx-flask:python3.6
 
-# Set the working directory to /app
+COPY ./app /app
+
 WORKDIR /app
 
-COPY requirements.txt ./
+# Contents of requirements.txt:
+# flask
+# pandas
+# scikit-learn
+RUN pip install -r requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the current directory contents into the container at /app
-COPY . .
-
-# open port 5000
-EXPOSE 5000
-
-CMD ["python", "app.py"]
+# For slimming, I think "ENTRYPOINT" is key.
+ENTRYPOINT ["python", "main.py"]
