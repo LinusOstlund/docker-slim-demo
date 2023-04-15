@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -14,6 +14,7 @@ def sims(brand):
     if brand in df['NAME'].values:
         results = get_sim_scotch(brand)
     else:
+        abort(404)
         results = {"Something":" went wrong in the sims method"}
     return render_template('index.html', whiskeys=df['NAME'].values, recommendations=results)
 
