@@ -57,20 +57,7 @@ docker push <your-docker-hub-username>/<name-of-app>
 After the image is pushed to Docker Hub, you can Harden the image via [slim.ai](slim.ai). Just remember to mark the `app`-folder as non-deleteable. When it is pushed to Docker Hub as a slim version, you run it with:
 
 ```bash
-docker run --rm --name linus -dp 5001:5123 linusost/scotch-model:latest-slim
+docker run --rm --name <name-of-container> -dp <free-port-on-your-system>:5123 <your-docker-hub-username>/<name-of-app>:latest-slim
 ```
 
-
-# Text
-
-Me and Praneet have build an application 
-
-So why would you want to slim it down?
-- dev vs prod
-- smaller image, faster and more agile
-- can be done by hand, but extremely time consuming
-- Reducing attack surface
-    - shells
-    - environment variables
-    - open ports
-    - files with special permission
+Note the `latest-slim` tag. This was the default tag name during the slimming process, which might change in the future. 
